@@ -36,7 +36,7 @@ var (
 )
 
 type CustomClaims struct {
-	Id uint `json:"userId"`
+	ID uint `json:"userId"`
 	UserName string `json:"userName"`
 	Email string `json:"email"`
 	jwt.StandardClaims
