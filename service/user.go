@@ -38,6 +38,21 @@ func (us *UserService)QueryByEmail(email string)(user *models.User,err error){
 	return
 }
 
+func(us *UserService)UpdateName(name string)(*models.User,*code.Code){
+	userModel := &models.User{}
+	user,err:=userModel.FindOne(map[string]interface{}{"name":name})
+	if err != nil {
+		log.Error().Msg(err.Error())
+		return nil,code.ServiceInsideError
+	}
+	updateUserName,err:=userModel.Update(user.ID, map[string]interface{}{"name":name})
+	if err != nil {
+		log.Error().Msg(err.Error())
+		return nil,code.ServiceInsideError
+	}
+	return updateUserName,nil
+}
+
 func (us *UserService)UpdatePass(oldPass string,newPass string)(*models.User,*code.Code)  {
 	userModel:=&models.User{}
 	user,err:=userModel.FindOne(map[string]interface{}{"email":us.Email})
@@ -59,3 +74,12 @@ func (us *UserService)UpdatePass(oldPass string,newPass string)(*models.User,*co
 	return updateUserPass,nil
 }
 
+func (us *UserService)UpdateAvatar(avatar string)(*models.User,*code.Code){
+	userModels:=&models.User{}
+	updateUser,err:=userModels.Update(us.UserID, map[string]interface{}{"avatar":avatar})
+	if err!=nil{
+		log.Error().Msg(err.Error())
+		return nil,code.ServiceInsideError
+	}
+	return updateUser,nil
+}

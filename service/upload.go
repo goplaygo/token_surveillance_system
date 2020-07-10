@@ -55,7 +55,7 @@ func (us *UploadService)CheckImgExt(filename string)bool {
 }
 
 //checkImgSize 检查图片大小是否超出
-func(us *UploadService)checkImgSize(f multipart.File) bool {
+func(us *UploadService)CheckImgSize(f multipart.File) bool {
 	content,err := ioutil.ReadAll(f)
 	if err != nil {
 		log.Error().Msg(err.Error())
@@ -67,7 +67,7 @@ func(us *UploadService)checkImgSize(f multipart.File) bool {
 	return fileSize <= conf.ServerConf.UploadLimit
 }
 //checkImgPath 检查图片路径创建以及权限
-func (us *UploadService)checkImgPath(path string)error {
+func (us *UploadService)CheckImgPath(path string)error {
 	dir,err := os.Getwd()
 	if err != nil {
 		return fmt.Errorf("os.getwd err:%v",err)

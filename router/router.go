@@ -37,7 +37,10 @@ func InitRouter()*gin.Engine{
 		{
 			apiV1.POST("/auth/signout",authController.Signout)//注销
 			apiV1.GET("/user",userController.FindUser)//查看用户信息
-			apiV1.PATCH("/user/pass",userController.Alterpass)
+			apiV1.PATCH("/user/name",userController.AlterName)//修改用户名
+			apiV1.PATCH("/user/pass",userController.AlterPass)//修改用户密码
+			apiV1.PATCH("/user/avatar",userController.AlterAvatar)//修改头像
 		}
 	}
+	return r
 }
